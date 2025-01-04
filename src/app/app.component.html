@@ -70,7 +70,7 @@
         <tr *ngFor="let year of years; let i = index">
           <td>第{{ i + 1 }}年</td>
           <td>{{ getAmount(i, 'allocation') | number: '1.0-0'  }}</td>
-          <td>{{storageFee}}</td>
+          <td>{{storageFee  | number: '1.0-0'}}</td>
           <!-- 費用率 -->
           <td *ngIf="i == 0">{{amount * fristRate | number: '1.0-0'}}</td>
           <td *ngIf="i == 1">{{amount * secondRate | number: '1.0-0'}}</td>
