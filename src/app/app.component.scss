@@ -52,3 +52,19 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* 禁用狀態的按鈕樣式 */
+button:disabled {
+  background-color: #d3d3d3; /* 灰色背景 */
+  border: 1px solid #ccc; /* 灰色邊框 */
+  color: #777; /* 灰色文字 */
+  cursor: not-allowed; /* 改變游標顯示為不可點擊 */
+}
+
+/* 顯示提示訊息 */
+.warning-message {
+  color: #ff0000; /* 紅色文字 */
+  font-size: 14px;
+  margin-top: 10px;
+}
+
