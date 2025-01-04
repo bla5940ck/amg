@@ -120,7 +120,7 @@
           <td>{{ getAmount(0, 'dividend') | number: '1.0-0'  }}</td>
           <td>{{ percentDividendAmount * 4}}</td>
           <td>{{ fourthYearTotalAllocation | number: '1.0-0'}}</td>
-          <td>{{amount + percentDividendAmount * 4 + fourthYearTotalAllocation | number: '1.0-0'}}</td>
+          <td>{{ getAmount(0, 'dividend') + percentDividendAmount * 4 + fourthYearTotalAllocation | number: '1.0-0'}}</td>
         </tr>
       </tbody>
     </table>
