@@ -30,6 +30,10 @@ export class AppComponent {
 
   public isAllWrite: boolean = true;
 
+  public fourthYearTotalAllocation: number = 0;
+
+  public percentDividendAmount: number = 0;
+
   // 初始化 years，這個陣列的每個元素是包含 year, allocation, dividend 的物件
   public years: { year: number, allocation: number, dividend: number }[] = [];
 
@@ -55,6 +59,7 @@ export class AppComponent {
         allocationAmount = this.calculateAllocationAmount(allocationAmount, this.secondRate);
       } else if(i == 4) {
         allocationAmount = this.calculateAllocationAmount(allocationAmount, this.thridRate);
+        this.fourthYearTotalAllocation = this.calculateAllocationAmount(allocationAmount, this.fourthRate);
       }
 
       // 每年都推送一個新的物件，包含年、配權金額和配息金額
@@ -64,6 +69,8 @@ export class AppComponent {
         dividend: dividendAmount
       });
     }
+    this.percentDividendAmount = this.amount * this.percentDividend / 100 * this.irr / 100;
+
   }
 
   calculateAllocationAmount(allocationAmount: number, yearRate: number) {

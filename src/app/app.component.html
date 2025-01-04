@@ -101,7 +101,26 @@
       <tbody>
         <tr>
           <td>{{amount * percentDividend / 100}}</td>
-          <td>{{amount * percentDividend / 100 * irr / 100 }}</td>
+          <td>{{percentDividendAmount }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>四年統整</h3>
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>初始配息</th>
+          <th>四年總配息</th>
+          <th>剩餘配權</th>
+          <th>總共</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ getAmount(0, 'dividend') | number: '1.0-0'  }}</td>
+          <td>{{ percentDividendAmount * 4}}</td>
+          <td>{{ fourthYearTotalAllocation | number: '1.0-0'}}</td>
+          <td>{{amount + percentDividendAmount * 4 + fourthYearTotalAllocation | number: '1.0-0'}}</td>
         </tr>
       </tbody>
     </table>
