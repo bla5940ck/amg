@@ -100,8 +100,8 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{amount * percentDividend / 100}}</td>
-          <td>{{percentDividendAmount }}</td>
+          <td>{{amount * percentDividend / 100 | number: '1.0-0'}}</td>
+          <td>{{percentDividendAmount | number: '1.0-0' }}</td>
         </tr>
       </tbody>
     </table>
@@ -118,7 +118,7 @@
       <tbody>
         <tr>
           <td>{{ getAmount(0, 'dividend') | number: '1.0-0'  }}</td>
-          <td>{{ percentDividendAmount * 4}}</td>
+          <td>{{ percentDividendAmount * 4 | number: '1.0-0'}}</td>
           <td>{{ fourthYearTotalAllocation | number: '1.0-0'}}</td>
           <td>{{ getAmount(0, 'dividend') + percentDividendAmount * 4 + fourthYearTotalAllocation | number: '1.0-0'}}</td>
         </tr>
