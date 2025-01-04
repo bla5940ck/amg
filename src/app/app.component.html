@@ -1,20 +1,91 @@
 <div class="container">
-    <h1>{{ title }}</h1>
-    
-    <div class="input-group">
-      <label for="amount">金額：</label>
-      <input 
-        type="number" 
-        id="amount" 
-        [(ngModel)]="amount" 
-        placeholder="請輸入金額"
-      />
-    </div>
-    
-    <button (click)="calculateAmount()">計算金額</button>
-    
-    <div *ngIf="calculatedAmount !== null">
-      <p>計算結果：{{ calculatedAmount | currency:'TWD' }}</p>
-    </div>
+  <h1>{{ title }}</h1>
+  
+  <div class="input-group">
+    <label for="amount">金額：</label>
+    <input 
+      type="number" 
+      id="amount" 
+      [(ngModel)]="amount" 
+      placeholder="請輸入金額"
+    />
+  </div>
+
+  <!-- 配權和配息輸入框 -->
+  <div class="input-group">
+    <label for="percent">配權百分比：</label>
+    <input 
+      type="number" 
+      id="percent"
+      [(ngModel)]="percentAllocation"
+      (ngModelChange)="onPercentChange('allocation')"
+      placeholder="輸入配權百分比"
+      [max]="100"
+      [min]="0"
+      (input)="checkPercentage('allocation')"
+    />
+  </div>
+
+  <div class="input-group">
+    <label for="dividendPercent">配息百分比：</label>
+    <input 
+      type="number" 
+      id="dividendPercent"
+      [disabled]="percentAllocation != null"
+      [(ngModel)]="percentDividend"
+      placeholder="輸入配息百分比"
+      (input)="checkPercentage('dividend')"
+    />
+  </div>
+
+  <div class="input-group">
+    <label for="dividendPercent">年化報酬率</label>
+    <input 
+      type="number" 
+      id="irr"
+      [(ngModel)]="irr"
+      placeholder="年化報酬率"
+    />
+  </div>
+
+  <!-- 顯示金額 -->
+  <div *ngIf="isShow">
+    <h3>配權與配息</h3>
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>年度</th>
+          <th>配權金額</th>
+          <th>保管費(100/month)</th>
+          <th>費用</th>
+          <th>當年配權</th>
+          <th>剩餘金額(權)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let year of years; let i = index">
+          <td>第{{ i + 1 }}年</td>
+          <td>{{ getAmount(i, 'allocation') | number: '1.0-0'  }}</td>
+          <td>{{storageFee}}</td>
+            <!-- 費用率 -->
+          <td *ngIf="i == 0">{{amount * fristRate | number: '1.0-0'}}</td>
+          <td *ngIf="i == 1">{{amount * secondRate | number: '1.0-0'}}</td>
+          <td *ngIf="i == 2">{{amount * thridRate | number: '1.0-0'}}</td>
+          <td *ngIf="i == 3">{{amount * fourthRate | number: '1.0-0'}}</td>
+           <!-- 當年配權 -->
+           <td *ngIf="i == 0">{{getAmount(i, 'allocation') * irr * 0.01 | number: '1.0-0'}}</td>
+           <td *ngIf="i == 1">{{getAmount(i, 'allocation') * irr * 0.01 | number: '1.0-0'}}</td>
+           <td *ngIf="i == 2">{{getAmount(i, 'allocation') * irr * 0.01 | number: '1.0-0'}}</td>
+           <td *ngIf="i == 3">{{getAmount(i, 'allocation') * irr * 0.01 | number: '1.0-0'}}</td>
+            <!-- 剩餘金額 -->
+            <td *ngIf="i == 0">{{this.calculateAllocationAmount(year.allocation, this.fristRate) | number: '1.0-0'}}</td>
+            <td *ngIf="i == 1">{{this.calculateAllocationAmount(year.allocation, this.secondRate) | number: '1.0-0'}}</td>
+            <td *ngIf="i == 2">{{this.calculateAllocationAmount(year.allocation, this.thridRate) | number: '1.0-0'}}</td>
+            <td *ngIf="i == 3">{{this.calculateAllocationAmount(year.allocation, this.fourthRate) | number: '1.0-0'}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   
+  <button (click)="calculateAmount()">計算金額</button>
+</div>
