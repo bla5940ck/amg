@@ -37,10 +37,6 @@ export class AppComponent {
   // 初始化 years，這個陣列的每個元素是包含 year, allocation, dividend 的物件
   public years: { year: number, allocation: number, dividend: number }[] = [];
 
-  public selectList = [{name:"水", value:"2"},{name:"食物", value:"3"}]
-
-  public selected = {name:"五",value:"3"};
-
   date: Date | null = null;  // 用來存放選擇的日期
 
   items: any[] = [];
