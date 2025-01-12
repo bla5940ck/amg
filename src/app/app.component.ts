@@ -37,6 +37,35 @@ export class AppComponent {
   // 初始化 years，這個陣列的每個元素是包含 year, allocation, dividend 的物件
   public years: { year: number, allocation: number, dividend: number }[] = [];
 
+  public selectList = [{name:"水", value:"2"},{name:"食物", value:"3"}]
+
+  public selected = {name:"五",value:"3"};
+
+  date: Date | null = null;  // 用來存放選擇的日期
+
+  items: any[] = [];
+  totalRecords: number = 0; // 總數據量
+  rows: number = 5; // 每頁顯示數量
+
+  selectedYear: any[] = [];
+
+
+  constructor() {
+    // 模擬100條數據
+    this.totalRecords = 100;
+    for (let i = 1; i <= this.totalRecords; i++) {
+      this.items.push({
+        id: i,
+        name: `Item ${i}`,
+        age: Math.floor(Math.random() * 30) + 20,
+        email: `item${i}@example.com`,
+        phone: `123-456-7890`,
+        address: `Address ${i}, City, Country`,
+        address2: `Address ${i}, City, Country`,
+        address3: `Address ${i}, City, Country`
+      });    }
+  }
+
   ngOnInit() {
     // 初始化時檢查是否有必要的數值，並且更新按鈕狀態
     this.checkAllValues();

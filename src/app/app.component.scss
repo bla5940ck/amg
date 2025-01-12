@@ -67,4 +67,17 @@ button:disabled {
   font-size: 14px;
   margin-top: 10px;
 }
+/* 讓 p-table 的字變小 */
+.p-datatable {
+  font-size: 0.8rem; /* 可以根據需求調整 */
+}
 
+/* 調整表頭字體 */
+.p-datatable thead th {
+  font-size: 0.8rem; /* 調整表頭字體大小 */
+}
+
+/* 調整表身字體 */
+.p-datatable tbody td {
+  font-size: 0.8rem; /* 調整表身字體大小 */
+}
